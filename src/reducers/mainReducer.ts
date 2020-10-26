@@ -3,6 +3,8 @@ interface Data {
   deaths: number | null;
   error: string | null;
   temp: number | undefined;
+  totalData: Object;
+  byCountry: Object;
 }
 
 export interface State {
@@ -14,6 +16,8 @@ const initialState: Data = {
   deaths: null,
   error: null,
   temp: undefined,
+  totalData: {},
+  byCountry: {}
 };
 
 const mainReducer = (
@@ -31,8 +35,20 @@ const mainReducer = (
       return { ...state, error: action.payload };
     case "GET_WEATHER":
       return { ...state, temp: action.payload };
+  
+    case "GET_TOTAL":
+        return {
+            ...state,
+            totalData: action.payload
+        }
+        case "TOTAL_BY_COUNTRY":
+        return {
+            ...state,
+            byCountry: action.payload
+        }
+    default:
+        return state
   }
-  return state;
 };
 
 export default mainReducer;
