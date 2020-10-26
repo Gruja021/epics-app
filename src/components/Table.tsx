@@ -27,19 +27,19 @@ function Table(props: any) {
   return (
     <div className="table-wrapper">
       <input type="text" placeholder="Search Country" onChange={handleChange} />
-      <table>
-        <thead>
-          <tr>
-            <th>Country</th>
-            <th>Country Code</th>
-            <th>New Confirmed</th>
-            <th>Total Confirmed</th>
-            <th>Total Deaths</th>
-            <th>Total Recovered</th>
-          </tr>
-        </thead>
-        <tbody>{listOfCountries}</tbody>
-      </table>
+        <table>
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>Country Code</th>
+              <th>New Confirmed</th>
+              <th>Total Confirmed</th>
+              <th>Total Deaths</th>
+              <th>Total Recovered</th>
+            </tr>
+          </thead>
+          <tbody>{listOfCountries}</tbody>
+        </table>
     </div>
   );
 }
