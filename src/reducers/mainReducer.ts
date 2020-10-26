@@ -1,10 +1,13 @@
 interface Data {
-  confirmed: number | null;
-  deaths: number | null;
   error: string | null;
   temp: number | undefined;
-  totalData: Object;
-  byCountry: Object;
+  totalData: Total;
+  byCountry: [];
+}
+
+interface Total {
+  Global: {};
+  Countries: [];
 }
 
 export interface State {
@@ -12,42 +15,40 @@ export interface State {
 }
 
 const initialState: Data = {
-  confirmed: null,
-  deaths: null,
   error: null,
   temp: undefined,
-  totalData: {},
-  byCountry: {}
+  totalData: {
+    Global: {
+      TotalConfirmed: 0,
+    },
+    Countries: [],
+  },
+  byCountry: [],
 };
 
 const mainReducer = (
   state = initialState,
   action: { type: string; payload: any }
 ) => {
+  console.log(action);
+
   switch (action.type) {
-    case "COUNTRY":
+    case "GET_TOTAL":
       return {
         ...state,
-        confirmed: action.payload.confirmed,
-        deaths: action.payload.deaths,
+        totalData: action.payload,
+      };
+    case "TOTAL_BY_COUNTRY":
+      return {
+        ...state,
+        byCountry: action.payload,
       };
     case "ERROR":
       return { ...state, error: action.payload };
     case "GET_WEATHER":
       return { ...state, temp: action.payload };
-  
-    case "GET_TOTAL":
-        return {
-            ...state,
-            totalData: action.payload
-        }
-        case "TOTAL_BY_COUNTRY":
-        return {
-            ...state,
-            byCountry: action.payload
-        }
     default:
-        return state
+      return state;
   }
 };
 
