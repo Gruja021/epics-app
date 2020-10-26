@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import "./App.scss";
-import { State } from "./reducers/mainReducer";
-
 import TotalInfected from "./components/TotalInfected";
 import Table from "./components/Table";
-// import totalInfectedAction from "./actions/totalInfectedActions";
 import { useSelector, useDispatch } from "react-redux";
 import { getData } from "./actions";
+import { GET_TOTAL, TOTAL_EPIC } from "./actions";
 
 let totalCopy: any;
 
@@ -15,7 +13,7 @@ function App() {
   const total = useSelector((state: any) => state.mainReducer);
 
   useEffect(() => {
-    dispatch({ type: "GET_TOTAL2" });
+    dispatch({ type: TOTAL_EPIC });
   }, [dispatch]);
 
   function handleChange(event: string) {
@@ -25,8 +23,7 @@ function App() {
     total.totalData.Countries = totalCopy.totalData.Countries.filter(
       (country: any) => country.Country.toLowerCase().includes(event)
     );
-    // dispatch(totalInfectedAction(total.totalData));
-    dispatch(getData("GET_TOTAL", total.totalData));
+    dispatch(getData(GET_TOTAL, total.totalData));
   }
 
   return (

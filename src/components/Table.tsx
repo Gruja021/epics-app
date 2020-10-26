@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-
 import "./table.scss";
+import { COUNTRY_EPIC } from "../actions";
 
 function Table(props: any) {
   const dispatch = useDispatch();
@@ -9,9 +9,7 @@ function Table(props: any) {
     return (
       <tr
         key={country.CountryCode}
-        onClick={() =>
-          dispatch({ type: "TOTAL_COUNTRY", payload: country.Slug })
-        }
+        onClick={() => dispatch({ type: COUNTRY_EPIC, payload: country.Slug })}
       >
         <td>{country.Country}</td>
         <td>{country.CountryCode}</td>
