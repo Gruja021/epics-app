@@ -1,3 +1,6 @@
 import { combineEpics } from "redux-observable";
 
-export const rootEpic = combineEpics();
+import totalEpic from "./totalEpics";
+import totalByCountry from "./totalByCountry";
+
+export const rootEpic = combineEpics(totalEpic, totalByCountry);
