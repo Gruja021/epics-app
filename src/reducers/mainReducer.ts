@@ -1,4 +1,9 @@
-import { ERROR, GET_TOTAL, GET_WEATHER, TOTAL_BY_COUNTRY } from "../actions";
+import {
+  LOAD_ERROR,
+  LOAD_TOTAL_DATA,
+  LOAD_WEATHER,
+  LOAD_TOTAL_BY_COUNTRY,
+} from "../actions";
 
 const initialState = {
   error: null,
@@ -15,20 +20,22 @@ const mainReducer = (
   action: { type: string; payload: any }
 ) => {
   switch (action.type) {
-    case GET_TOTAL:
+    case LOAD_TOTAL_DATA:
       return {
         ...state,
         totalData: action.payload,
+        error: null,
       };
-    case TOTAL_BY_COUNTRY:
+    case LOAD_TOTAL_BY_COUNTRY:
       return {
         ...state,
         byCountry: action.payload,
+        error: null,
       };
-    case ERROR:
+    case LOAD_ERROR:
       return { ...state, error: action.payload };
-    case GET_WEATHER:
-      return { ...state, temp: action.payload };
+    case LOAD_WEATHER:
+      return { ...state, temp: action.payload, error: null };
     default:
       return state;
   }

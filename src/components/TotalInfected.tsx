@@ -14,10 +14,12 @@ function TotalInfected(props: {
         <>
           <span>Country: {props.country}</span>
           <span>Total cases: {props.cases}</span>
-          <span>
-            Temperature: {Math.round(props.temp)}
-            <sup>&#x2103;</sup>
-          </span>
+          {props.temp && (
+            <span>
+              Temperature: {Math.round(props.temp)}
+              <sup>&#x2103;</sup>
+            </span>
+          )}
         </>
       ) : null}
     </div>

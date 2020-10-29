@@ -3,10 +3,10 @@ import { catchError, mergeMap } from "rxjs/operators";
 import { ajax } from "rxjs/ajax";
 import { of } from "rxjs";
 import {
-  getData,
-  TOTAL_BY_COUNTRY,
+  setData,
+  LOAD_TOTAL_BY_COUNTRY,
   WEATHER_EPIC,
-  ERROR,
+  LOAD_ERROR,
   COUNTRY_EPIC,
 } from "../actions";
 
@@ -18,7 +18,7 @@ const countryEpic: Epic = (action$) =>
         .getJSON(`https://api.covid19api.com/dayone/country/${action.payload}`)
         .pipe(
           mergeMap((res: any) =>
-            of(getData(TOTAL_BY_COUNTRY, res), {
+            of(setData(LOAD_TOTAL_BY_COUNTRY, res), {
               type: WEATHER_EPIC,
               payload: {
                 lat: res[res.length - 1].Lat,
@@ -26,7 +26,9 @@ const countryEpic: Epic = (action$) =>
               },
             })
           ),
-          catchError(() => of(getData(ERROR, "Country not found!")))
+          catchError(() =>
+            of(setData(LOAD_ERROR, "Data for this country not found!"))
+          )
         )
     )
   );

@@ -3,8 +3,8 @@ import "./App.scss";
 import TotalInfected from "./components/TotalInfected";
 import Table from "./components/Table";
 import { useSelector, useDispatch } from "react-redux";
-import { getData } from "./actions";
-import { GET_TOTAL, TOTAL_EPIC } from "./actions";
+import { setData } from "./actions";
+import { LOAD_TOTAL_DATA, TOTAL_EPIC } from "./actions";
 
 let totalCopy: any;
 
@@ -23,7 +23,7 @@ function App() {
     total.totalData.Countries = totalCopy.totalData.Countries.filter(
       (country: any) => country.Country.toLowerCase().includes(event)
     );
-    dispatch(getData(GET_TOTAL, total.totalData));
+    dispatch(setData(LOAD_TOTAL_DATA, total.totalData));
   }
 
   return (
@@ -40,6 +40,7 @@ function App() {
         }
         temp={total.temp}
       />
+      {total.error && <div className="error">{total.error}</div>}
       <Table
         totalDataCountries={
           total.totalData.Countries ? total.totalData.Countries : []
